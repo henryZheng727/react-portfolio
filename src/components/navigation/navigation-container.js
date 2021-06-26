@@ -1,23 +1,43 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-export default class navigationComponent extends Component {
-    constructor () {
+export default class NavigationComponent extends Component {
+    constructor() {
         super();
     }
 
     render() {
-        return(
-            <div>
-                <NavLink exact to="/">
-                    Home
-                </NavLink>
+        return (
+            <div className="nav-wrapper">
+                <div className="left-side">
+                    <div className="nav-link-wrapper">
+                        <NavLink exact to="/" activeClassName="nav-link-active">
+                            Home
+                        </NavLink>
+                    </div>
+                    <div className="nav-link-wrapper">
 
-                <NavLink to="/about-me">About</NavLink>
-                <button>Contact</button>
-                <button>Blog</button>
-                {false ? <button>Add Blog</button> : null }
+                        <NavLink to="/about-me" activeClassName="nav-link-active">
+                            About
+                        </NavLink>
+                    </div>
+                    <div className="nav-link-wrapper">
+                        <NavLink to="/contact" activeClassName="nav-link-active">
+                            Contact
+                        </NavLink>
+                    </div>
+                    <div className="nav-link-wrapper">
+                        <NavLink to="/blog" activeClassName="nav-link-active">
+                            Blog
+                        </NavLink>
+                    </div>
+                    {false ? <button>Add Blog</button> : null}
+                </div>
+
+                <div className="right-side">
+                    HENRY ZHENG
+                </div>
             </div>
-        )
+        );
     }
 }
