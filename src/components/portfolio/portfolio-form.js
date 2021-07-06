@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class PortfolioForm extends Component {
     constructor(props) {
@@ -23,6 +24,12 @@ export default class PortfolioForm extends Component {
         let formData = new FormData();
 
         formData.append("portfolio_item[name]", this.state.name);
+        formData.append("portfolio_item[description]", this.state.description);
+        formData.append("portfolio_item[url]", this.state.url);
+        formData.append("portfolio_item[category]", this.state.category);
+        formData.append("portfolio_item[position]", this.state.position);
+
+        return formData;
     }
 
     handleChange(event) {
@@ -32,7 +39,16 @@ export default class PortfolioForm extends Component {
     }
 
     handleSubmit(event) {
-        console.log("event", event);
+        axios.post(
+            "https://henryzheng727.devcamp.space/portfolio/portfolio_items",
+            this.buildForm(),
+            { withCredentials: true }
+        ).then(response => {
+            console.log("response", response);
+        }).catch(error => {
+            console.log("portfolio form handleSubmit error", error);
+        });
+
         event.preventDefault();
     }
 
@@ -70,17 +86,19 @@ export default class PortfolioForm extends Component {
                             onChange={this.handleChange}
                         />
 
-                        <input
-                            type="text"
+                        <select
                             name="category"
-                            placeholder="Category"
                             value={this.state.category}
                             onChange={this.handleChange}
-                        />
+                        >
+                            <option value="eCommerce">eCommerce</option>
+                            <option value="Scheduling">Scheduling</option>
+                            <option value="Enterprise">Enterprise</option>
+                        </select>
                     </div>
 
                     <div>
-                        <input
+                        <textarea
                             type="text"
                             name="description"
                             placeholder="Description"
