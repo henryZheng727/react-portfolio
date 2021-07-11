@@ -1,3 +1,6 @@
+//BUG - if image is too small, then it makes the container small
+//BUG - if you don't use full screen, the items get realigned and pushed by the text
+
 import React, { Component } from "react";
 import axios from 'axios';
 
@@ -39,7 +42,6 @@ export default class PortfolioContainer extends Component {
     portfolioItems() {
 
         return this.state.data.map(item => {
-            debugger;
             return (
                 <PortfolioItem
                     key={item.id}
